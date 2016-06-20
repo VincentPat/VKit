@@ -1,7 +1,12 @@
+/**
+ * @author VincentHuang
+ * @version 1.0.0
+ * @description 常用的一些方法，整理到工具包中
+ */
 var VKit = function() {
 	
 	var vkit = {
-
+		
 		/**
 		 * 获取一个对象的类名
 		 * @param obj {Object}
