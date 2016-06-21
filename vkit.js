@@ -1,6 +1,6 @@
 /**
  * @author VincentHuang
- * @version 1.0.1
+ * @version 1.0.2
  * @description 常用的一些方法，整理到工具包中
  */
 var VKit = function() {
@@ -104,6 +104,31 @@ var VKit = function() {
 		        return all;
 		    });
 		    return format;
+		},
+
+		/**
+		 * 输入范围生成数组
+		 * @param  {Number} start 起始数字(包含)
+		 * @param  {Number} stop  结束数字(不包含)
+		 * @param  {Number} step  步长
+		 * @return {Array}       数组
+		 */
+		range: function (start, stop, step) {
+		    if (typeof(stop) == 'undefined') {
+		        stop = start;
+		        start = 0;
+		    }
+		    if (typeof(step) == 'undefined') {
+		        step = 1;
+		    }
+		    if ((step > 0 && start >= stop) || (step < 0 && start <= stop)) {
+		        return [];
+		    }
+		    var result = [];
+		    for (var i = start; step > 0 ? i < stop : i > stop; i = this.accPlus(i, step)) {
+		        result.push(i);
+		    }
+		    return result;
 		}
 
 	};
