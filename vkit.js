@@ -1,6 +1,6 @@
 /**
  * @author VincentHuang
- * @version 1.0.2
+ * @version 1.0.3
  * @description 常用的一些方法，整理到工具包中
  */
 var VKit = function() {
@@ -113,7 +113,7 @@ var VKit = function() {
 		 * @param  {Number} step  步长
 		 * @return {Array}       数组
 		 */
-		range: function (start, stop, step) {
+		range: function(start, stop, step) {
 		    if (typeof(stop) == 'undefined') {
 		        stop = start;
 		        start = 0;
@@ -129,6 +129,19 @@ var VKit = function() {
 		        result.push(i);
 		    }
 		    return result;
+		},
+
+		/**
+		 * 数组去重
+		 * @param  {Array} arr 需要去重的数组
+		 * @return {Array}     去重结果
+		 */
+		unique: function(arr) {
+			var result = [];
+			for (var index in arr) {
+				if (result.indexOf(arr[index]) === -1) result.push(arr[index]);
+			}
+			return result;
 		}
 
 	};
