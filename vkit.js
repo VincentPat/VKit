@@ -1,6 +1,6 @@
 /**
  * @author VincentHuang
- * @version 1.0.3
+ * @version 1.0.4
  * @description 常用的一些方法，整理到工具包中
  */
 var VKit = function() {
@@ -142,10 +142,68 @@ var VKit = function() {
 				if (result.indexOf(arr[index]) === -1) result.push(arr[index]);
 			}
 			return result;
+		},
+
+		/**
+		 * 字符串截取，超出长度在末尾添加点点点
+		 * @param  {String} str 字符串
+		 * @param  {Number} len 长度
+		 * @return {String}     截取完成字符串
+		 */
+		cutStr: function(str, len) {
+			var temp,
+		        icount = 0,
+		        pattern = /[^\x00-\xff]/,
+		        result = "";
+		    for (var i = 0; i < str.length; i++) {
+		        if (icount <= len - 1) {
+		            temp = str.substr(i, 1);
+		            if (pattern.exec(temp) == null) {
+		                icount = icount + 1;
+		            } else {
+		                icount = icount + 2;
+		            }
+		           	result += temp;
+		        } else {
+		            break;
+		        }
+		    }
+		    return result + "...";
+		},
+
+		/**
+		 * 正则全局替换
+		 * @param  {RegExp} pattern    正则
+		 * @param  {String} replaceStr 替换的字符串
+		 * @param  {String} Str        被替换的字符串
+		 * @return {String}            替换后字符串
+		 */
+		replaceAll: function(pattern, replaceStr, Str) {
+		    return Str.replace(new RegExp(pattern, "gm"), replaceStr);
+		},
+
+		/**
+		 * 字符串开头检测
+		 * @param  {String} search 搜索的字符串
+		 * @param  {String} str    被搜索的字符串
+		 * @return {Boolean}        搜索结果
+		 */
+		startWith: function(search, str) {
+			return str.indexOf(search) == 0;
+		},
+
+		/**
+		 * 字符串结尾检测
+		 * @param  {String} search 搜索的字符串
+		 * @param  {String} str    被搜索的字符串
+		 * @return {Boolean}        搜索结果
+		 */
+		endWith: function(search, str) {
+			var d = str.length - search.length;
+    		return (d >= 0 && str.lastIndexOf(search) == d);
 		}
 
 	};
 
 	return vkit;
-
 };
