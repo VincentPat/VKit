@@ -1,6 +1,6 @@
 /**
  * @author VincentHuang
- * @version 1.0.4
+ * @version 1.0.5
  * @description 常用的一些方法，整理到工具包中
  */
 var VKit = function() {
@@ -201,6 +201,55 @@ var VKit = function() {
 		endWith: function(search, str) {
 			var d = str.length - search.length;
     		return (d >= 0 && str.lastIndexOf(search) == d);
+		},
+
+		/**
+		 * 设置Cookie
+		 * @param {String} name     cookie key
+		 * @param {String} value    cookit value
+		 * @param {Number} lastTime 持续时间
+		 * @param {String} path     路径
+		 * @param {String} domain   域
+		 * @return {Boolean}        结果
+		 */
+		setCookie: function(name, value, lastTime, path, domain) {
+			if (!name) return false;
+		    var d = new Date();
+		    d = d.getTime() + lastTime;
+		    var exp = new Date(d);
+		    var _path = path || "/";
+		    var _domain = domain || "";
+		    document.cookie = name + "=" + escape(value) + ";path=" + _path + ";expires=" + exp.toGMTString() + ";domain=" + _domain + ";";
+			console.log(name + "=" + escape(value) + ";path=" + _path + ";expires=" + exp.toGMTString() + ";domain=" + _domain + ";");
+			return true;
+		},
+
+		/**
+		 * 获取Cookie
+		 * @param  {String} name cookie key
+		 * @return {String}      结果
+		 */
+		getCookie: function(name) {
+		    var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
+		    if (arr != null) return unescape(arr[2]);
+		    return null;
+		},
+
+		/**
+		 * 添加到收藏夹
+		 * @param {String} sURL   URL
+		 * @param {String} sTitle 标题
+		 */
+		addFavorite: function(sURL, sTitle) {
+		    try {
+		        window.external.addFavorite(sURL, sTitle)
+		    } catch(e) {
+		        try {
+		            window.sidebar.addPanel(sTitle, sURL, "")
+		        } catch(e) {
+		            alert("加入收藏失败，请使用Ctrl+D进行添加")
+		        }
+		    }
 		}
 
 	};
