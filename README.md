@@ -3,7 +3,7 @@ My javascript tool kit
 
 整理一些常用的方法，收集到自己的工具包里。
 
-####当前版本：v1.0.5
+####当前版本：v1.0.6
 
 ####已收录方法：
 - getClassOf 获取一个对象的类名
@@ -20,4 +20,7 @@ My javascript tool kit
 - endWith 字符串结尾检测
 - setCookie 设置Cookie
 - getCookit 获取Cookie
-- addFavorite 添加地址到收藏夹（Chrome不兼容）
+- isMobile 判断是否为移动设备
+- isApple 判断是否为苹果设备
+- isAndroid 判断是否为安卓设备
+- isURL 判断是否为合法URL

@@ -1,6 +1,6 @@
 /**
  * @author VincentHuang
- * @version 1.0.5
+ * @version 1.0.6
  * @description 常用的一些方法，整理到工具包中
  */
 var VKit = function() {
@@ -236,19 +236,40 @@ var VKit = function() {
 		},
 
 		/**
-		 * 添加到收藏夹
-		 * @param {String} sURL   URL
-		 * @param {String} sTitle 标题
+		 * 判断是否为移动设备
+		 * @return {Boolean} 结果
 		 */
-		addFavorite: function(sURL, sTitle) {
-		    try {
-		        window.external.addFavorite(sURL, sTitle)
-		    } catch(e) {
-		        try {
-		            window.sidebar.addPanel(sTitle, sURL, "")
-		        } catch(e) {
-		            alert("加入收藏失败，请使用Ctrl+D进行添加")
-		        }
+		isMobile: function() {
+		    return (/iphone|ipod|android.*mobile|windows.*phone|blackberry.*mobile/i.test(window.navigator.userAgent.toLowerCase()));
+		},
+
+		/**
+		 * 判断是否为苹果设备
+		 * @return {Boolean} 结果
+		 */
+		isApple: function() {
+		    return (/iphone|ipod|ipad|Macintosh/i.test(navigator.userAgent.toLowerCase()));
+		},
+
+		/**
+		 * 判断是否为安卓设备
+		 * @return {Boolean} 结果
+		 */
+		isAndroid: function () {
+		    return (/android/i.test(navigator.userAgent.toLowerCase()));
+		},
+
+		/**
+		 * 判断是否为合法URL
+		 * @param  {String}  url 链接地址
+		 * @return {Boolean}     结果
+		 */
+		isURL: function(url) {
+		    var regular = /^\b(((https?|ftp):\/\/)?[-a-z0-9]+(\.[-a-z0-9]+)*\.(?:com|edu|gov|int|mil|net|org|biz|info|name|museum|asia|coop|aero|[a-z][a-z]|((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d))\b(\/[-a-z0-9_:\@&?=+,.!\/~%\$]*)?)$/i
+		    if (regular.test(url)) {
+		        return true;
+		    } else {
+		        return false;
 		    }
 		}
 
