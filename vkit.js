@@ -1,11 +1,15 @@
 /**
  * @author VincentHuang
- * @version 1.0.6
+ * @version 1.0.7
  * @description 常用的一些方法，整理到工具包中
  */
 var VKit = function() {
 	
 	var vkit = {
+
+		/**-----------------------------------
+		 * 类相关
+		 -----------------------------------*/
 		
 		/**
 		 * 获取一个对象的类名
@@ -17,6 +21,10 @@ var VKit = function() {
 			if (obj === undefined) return "Undefined";
 			return Object.prototype.toString.call(obj).slice(8, -1);
 		},
+
+		/**-----------------------------------
+		 * 数字相关
+		 -----------------------------------*/
 
 		/**
 		 * 精确加法
@@ -71,6 +79,85 @@ var VKit = function() {
 		},
 
 		/**
+		 * 数字转换成大写
+		 * @param  {String | Number} value 待转换数字
+		 * @return {String}           转换结果
+		 */
+		numberToCN: function(value) {
+		    try {
+		        var i = 1;
+		        var dw2 = new Array("", "万", "亿"); //大单位
+		        var dw1 = new Array("拾", "佰", "仟"); //小单位
+		        var dw = new Array("零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"); //整数部分用
+		        var str = "";
+		        //以下是小写转换成大写显示在合计大写的文本框中     
+		        //分离整数与小数
+		        var source = ['', ''];
+		        var temp = value.toString().split('.');
+		        for (var index = 0; index < temp.length; index++) {
+		        	source[index] = temp[index];
+		        }
+		        var num = source[0];
+		        var dig = source[1];
+		        //转换整数部分
+		        var k1 = 0; //计小单位
+		        var k2 = 0; //计大单位
+		        var sum = 0;
+		        var len = source[0].length; //整数的长度
+		        for (i = 1; i <= len; i++) {
+					var n = source[0].charAt(len - i); //取得某个位数上的数字
+					var bn = 0;
+					if (len - i - 1 >= 0) {
+						bn = source[0].charAt(len - i - 1); //取得某个位数前一位上的数字
+					}
+					sum = sum + Number(n);
+					if (sum != 0) {
+						str = dw[Number(n)].concat(str); //取得该数字对应的大写数字，并插入到str字符串的前面
+						if (n == '0') sum = 0;
+					}
+					if (len - i - 1 >= 0) { //在数字范围内
+						if (k1 != 3) { //加小单位
+							if (bn != 0) {
+								str = dw1[k1].concat(str);
+							}
+							k1++;
+						} else { //不加小单位，加大单位
+							k1 = 0;
+							var temp = str.charAt(0);
+							if (temp == "万" || temp == "亿") //若大单位前没有数字则舍去大单位
+								str = str.substr(1, str.length - 1);
+							str = dw2[k2].concat(str);
+							sum = 0;
+						}
+					}
+					if (k1 == 3) { //小单位到千则大单位进一
+						k2++;
+					}
+		        }
+		        //转换小数部分
+		        var strdig = "";
+		        if (dig != "") {
+		              var n = dig.charAt(0);
+		              if (n != 0) {
+		                strdig += dw[Number(n)] + "角"; //加数字
+		              }
+		              var n = dig.charAt(1);
+		              if (n != 0) {
+		                strdig += dw[Number(n)] + "分"; //加数字
+		              }
+		        }
+		        str += "元" + strdig;
+		    } catch(e) {
+		        return "0元";
+		    }
+		    return str;
+		},
+
+		/**-----------------------------------
+		 * 日期相关
+		 -----------------------------------*/
+
+		/**
 		 * 日期格式化
 		 * @param  {Date} date   日期
 		 * @param  {String} format 格式
@@ -105,6 +192,10 @@ var VKit = function() {
 		    });
 		    return format;
 		},
+
+		/**-----------------------------------
+		 * 数组相关
+		 -----------------------------------*/
 
 		/**
 		 * 输入范围生成数组
@@ -143,6 +234,10 @@ var VKit = function() {
 			}
 			return result;
 		},
+
+		/**-----------------------------------
+		 * 字符串相关
+		 -----------------------------------*/
 
 		/**
 		 * 字符串截取，超出长度在末尾添加点点点
@@ -204,6 +299,33 @@ var VKit = function() {
 		},
 
 		/**
+		 * 判断是否为合法URL
+		 * @param  {String}  url 链接地址
+		 * @return {Boolean}     结果
+		 */
+		isURL: function(url) {
+		    var regular = /^\b(((https?|ftp):\/\/)?[-a-z0-9]+(\.[-a-z0-9]+)*\.(?:com|edu|gov|int|mil|net|org|biz|info|name|museum|asia|coop|aero|[a-z][a-z]|((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d))\b(\/[-a-z0-9_:\@&?=+,.!\/~%\$]*)?)$/i
+		    if (regular.test(url)) {
+		        return true;
+		    } else {
+		        return false;
+		    }
+		},
+
+		/**
+		 * 反转字符串
+		 * @param  {String} str 原字符串
+		 * @return {String}     反转后字符串
+		 */
+		reverseStr: function(str) {
+		    return str.split('').reverse().join('');
+		},
+
+		/**-----------------------------------
+		 * Cookie
+		 -----------------------------------*/
+
+		/**
 		 * 设置Cookie
 		 * @param {String} name     cookie key
 		 * @param {String} value    cookit value
@@ -235,6 +357,10 @@ var VKit = function() {
 		    return null;
 		},
 
+		/**-----------------------------------
+		 * 移动设备判断
+		 -----------------------------------*/
+
 		/**
 		 * 判断是否为移动设备
 		 * @return {Boolean} 结果
@@ -257,20 +383,6 @@ var VKit = function() {
 		 */
 		isAndroid: function () {
 		    return (/android/i.test(navigator.userAgent.toLowerCase()));
-		},
-
-		/**
-		 * 判断是否为合法URL
-		 * @param  {String}  url 链接地址
-		 * @return {Boolean}     结果
-		 */
-		isURL: function(url) {
-		    var regular = /^\b(((https?|ftp):\/\/)?[-a-z0-9]+(\.[-a-z0-9]+)*\.(?:com|edu|gov|int|mil|net|org|biz|info|name|museum|asia|coop|aero|[a-z][a-z]|((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d))\b(\/[-a-z0-9_:\@&?=+,.!\/~%\$]*)?)$/i
-		    if (regular.test(url)) {
-		        return true;
-		    } else {
-		        return false;
-		    }
 		}
 
 	};
