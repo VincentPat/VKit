@@ -1,6 +1,6 @@
 /**
  * @author VincentHuang
- * @version 1.0.9
+ * @version 1.1.0
  * @description 常用的一些方法，整理到工具包中
  */
 var VKit = function() {
@@ -164,7 +164,7 @@ var VKit = function() {
 		 * @return {String}        格式化日期
 		 */
 		dateFormat: function(date, format) {
-		    if(format === undefined){
+		    if (format === undefined) {
 		        format = date;
 		        date = new Date();
 		    }
@@ -359,6 +359,17 @@ var VKit = function() {
 		        }
 		    }
 		    return result;
+		},
+
+		/**
+		 * 获取GUID
+		 * @return {[type]} [description]
+		 */
+		getGUID: function() {
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+		        return v.toString(16);
+		    });
 		},
 
 		/**-----------------------------------
