@@ -1,6 +1,6 @@
 /**
  * @author VincentHuang
- * @version 1.0.7
+ * @version 1.0.8
  * @description 常用的一些方法，整理到工具包中
  */
 var VKit = function() {
@@ -319,6 +319,46 @@ var VKit = function() {
 		 */
 		reverseStr: function(str) {
 		    return str.split('').reverse().join('');
+		},
+
+		/**
+		 * 半角转换成全角
+		 * @param  {String} str 原字符串
+		 * @return {String}     转换后字符串
+		 */
+		toDBC: function(str) {
+		    var result = '';
+		    for (var i = 0; i < str.length; i++) {
+		        code = str.charCodeAt(i);
+		        if (code >= 33 && code <= 126) {
+		              result += String.fromCharCode(str.charCodeAt(i) + 65248);
+		        } else if (code == 32) {
+		              result += String.fromCharCode(str.charCodeAt(i) + 12288 - 32);
+		        } else {
+		              result += str.charAt(i);
+		        }
+		    }
+		    return result;
+		},
+
+		/**
+		 * 全角转换成半角
+		 * @param  {String} str 原字符串
+		 * @return {String}     转换后字符串
+		 */
+		toCDB: function(str) {
+		    var result = '';
+		    for (var i = 0; i < str.length; i++) {
+		        code = str.charCodeAt(i);
+		        if (code >= 65281 && code <= 65374) {
+		              result += String.fromCharCode(str.charCodeAt(i) - 65248);
+		        } else if (code == 12288){
+		              result += String.fromCharCode(str.charCodeAt(i) - 12288 + 32);
+		        } else {
+		              result += str.charAt(i);
+		        }
+		    }
+		    return result;
 		},
 
 		/**-----------------------------------

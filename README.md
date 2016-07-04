@@ -3,7 +3,7 @@ My javascript tool kit
 
 整理一些常用的方法，收集到自己的工具包里。
 
-####当前版本：v1.0.7
+####当前版本：v1.0.8
 
 ####已收录方法：
 #####类相关：
@@ -30,6 +30,8 @@ My javascript tool kit
 - endWith 字符串结尾检测
 - isURL 判断是否为合法URL
 - reverseStr 反转字符串
+- toDBC 半角转换成全角
+- toCDB 全角转换成半角
 
 #####Cookie：
 - setCookie 设置Cookie
