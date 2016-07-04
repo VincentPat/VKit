@@ -1,6 +1,6 @@
 /**
  * @author VincentHuang
- * @version 1.0.8
+ * @version 1.0.9
  * @description 常用的一些方法，整理到工具包中
  */
 var VKit = function() {
@@ -362,7 +362,7 @@ var VKit = function() {
 		},
 
 		/**-----------------------------------
-		 * Cookie
+		 * Cookie相关
 		 -----------------------------------*/
 
 		/**
@@ -398,7 +398,7 @@ var VKit = function() {
 		},
 
 		/**-----------------------------------
-		 * 移动设备判断
+		 * 移动设备相关
 		 -----------------------------------*/
 
 		/**
@@ -423,6 +423,47 @@ var VKit = function() {
 		 */
 		isAndroid: function () {
 		    return (/android/i.test(navigator.userAgent.toLowerCase()));
+		},
+
+		/**-----------------------------------
+		 * 兼容性相关
+		 -----------------------------------*/
+
+		/**
+		 * 是否支持transition
+		 * @return {Boolean} 结果
+		 */
+		supportTransition: function() {
+			var s = document.createElement('p').style,
+		        r = 'transition' in s ||
+		        'WebkitTransition' in s ||
+		        'MozTransition' in s ||
+		        'msTransition' in s ||
+		        'OTransition' in s;
+		    s = null;
+		    return r;
+		},
+
+		/**
+		 * 获取已安装flash版本
+		 * 备注：如果获取到的版本号为0，则不支持
+		 * @return {String} 版本号
+		 */
+		flashVersion: function() {
+			var version;
+		    try {
+		        version = navigator.plugins['Shockwave Flash'];
+		        version = version.description;
+		    } catch (ex) {
+		        try {
+		            version = new ActiveXObject('ShockwaveFlash.ShockwaveFlash')
+		                .GetVariable('$version');
+		        } catch (ex2) {
+		            version = '0.0';
+		        }
+		    }
+		    version = version.match(/\d+/g);
+		    return parseFloat(version[0] + '.' + version[1], 10);
 		}
 
 	};

@@ -3,7 +3,7 @@ My javascript tool kit
 
 整理一些常用的方法，收集到自己的工具包里。
 
-####当前版本：v1.0.8
+####当前版本：v1.0.9
 
 ####已收录方法：
 #####类相关：
@@ -33,7 +33,7 @@ My javascript tool kit
 - toDBC 半角转换成全角
 - toCDB 全角转换成半角
 
-#####Cookie：
+#####Cookie相关：
 - setCookie 设置Cookie
 - getCookit 获取Cookie
 
@@ -41,3 +41,8 @@ My javascript tool kit
 - isMobile 判断是否为移动设备
 - isApple 判断是否为苹果设备
 - isAndroid 判断是否为安卓设备
+
+#####兼容性相关：
+- supportTransition 是否支持transition
+- flashVersion 获取已安装flash版本
+
