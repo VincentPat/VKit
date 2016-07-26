@@ -1,6 +1,6 @@
 /**
  * @author VincentHuang
- * @version 1.1.0
+ * @version 1.1.1
  * @description 常用的一些方法，整理到工具包中
  */
 var VKit = function() {
@@ -79,11 +79,11 @@ var VKit = function() {
 		},
 
 		/**
-		 * 数字转换成大写
+		 * 金额转换成大写
 		 * @param  {String | Number} value 待转换数字
 		 * @return {String}           转换结果
 		 */
-		numberToCN: function(value) {
+		moneyToCN: function(value) {
 		    try {
 		        var i = 1;
 		        var dw2 = new Array("", "万", "亿"); //大单位
@@ -152,6 +152,51 @@ var VKit = function() {
 		    }
 		    return str;
 		},
+
+		/**
+		 * 数字转换成大写
+		 * @param  {String | Number} num 待转换数字
+		 * @return {String}     数字大写
+		 */
+		// numberToCN: function(num) {
+		// 	var result;
+		// 	num = num.toString();
+		// 	var pattern = /^-?\d+(\.\d+)?$/;
+		// 	if (pattern.exec(num)) {
+		// 		// 分离整数和小数
+		// 		var interger, decimal;
+		// 		var pattern_decimal = /\.\d+$/;
+		// 		if (pattern_decimal.exec(pattern_decimal)) { // 带小数
+		// 			interger = num.split("\.")[0];
+		// 			decimal = num.split("\.")[1];
+		// 		} else { // 纯整数
+		// 			interger = num.split("\.")[0];
+		// 		}
+		// 		// 数字与单位
+		// 		var numbers = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+		// 		var unit = ["十", "百", "千", "万", "十万", "百万", "千万", "亿", "十亿", "百亿", "千亿"];
+		// 		// 处理整数部分
+		// 		var interger_arr = interger.split("").reverse(); // 记得是先反转过来，从低位开始处理的
+		// 		console.log(interger_arr);
+		// 		var result_interger = "";
+		// 		for (var i = 0; i < interger_arr.length; i++) {
+		// 			var number = parseInt(interger_arr[i]);
+		// 			result_interger = numbers[number] + result_interger;
+		// 			if (i >= 1) { // 从十位开始有单位
+		// 				result_interger += unit[i-1];
+		// 			}
+		// 			console.log(number, result_interger);
+		// 		}
+		// 		// 处理小数部分
+		// 		var result_decimal = "";
+		// 		result = result_interger + (decimal ? "点" : "") + result_decimal;
+		// 		return result;
+		// 	} else {
+		// 		return "零";
+		// 	}
+			
+		// 	return result;
+		// },
 
 		/**-----------------------------------
 		 * 日期相关
@@ -475,6 +520,21 @@ var VKit = function() {
 		    }
 		    version = version.match(/\d+/g);
 		    return parseFloat(version[0] + '.' + version[1], 10);
+		},
+
+		/**-----------------------------------
+		 * 应用相关
+		 -----------------------------------*/
+
+		// 复制到粘贴板
+		copyToClipboard: function(text) {
+			var text_field = document.createElement('textarea');
+			text_field.innerText = text;
+			document.body.appendChild(text_field);
+			text_field.select();
+			document.execCommand('copy');
+			text_field.remove();
+			alert('已复制：'+text);
 		}
 
 	};

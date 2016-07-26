@@ -3,7 +3,7 @@ My javascript tool kit
 
 整理一些常用的方法，收集到自己的工具包里。
 
-####当前版本：v1.1.0
+####当前版本：v1.1.1
 
 ####已收录方法：
 #####类相关：
@@ -14,7 +14,7 @@ My javascript tool kit
 - accMinus 精确减法
 - accMultiply 精确乘法
 - accDivide 精确除法
-- numberToCN 数字转换成大写
+- moneyToCN 金额转换成大写
 
 #####日期相关：
 - dateFormat 日期格式化
@@ -46,4 +46,7 @@ My javascript tool kit
 #####兼容性相关：
 - supportTransition 是否支持transition
 - flashVersion 获取已安装flash版本
+
+#####应用相关：
+- copyToClipboard 复制内容到粘贴板
 
