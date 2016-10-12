@@ -49,7 +49,7 @@ var VKit = function() {
 		 * @return {String}      
 		 */
 		accMinus: function(arg1, arg2) {
-			return Calc.Add(arg1, -Number(arg2), arguments[2]);
+			return this.accPlus(arg1, -Number(arg2), arguments[2]);
 		},
 
 		/**
